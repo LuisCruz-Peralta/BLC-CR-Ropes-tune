@@ -1,0 +1,52 @@
+! This file will generate inelastic events primarily to compare with ALICE data
+! Command file for pp collision to study charm hadrons production
+! Note that for the various output functionalities to work,
+! HepMC, YODA, RIVET and ROOT respectively needs to either
+! be installed to system path, or appended before compiling.
+
+! 1) Settings related to the physics processes generated. Here
+! a simple pp soft QCD run at 13 TeV.
+Beams:idA = 2212        ! first beam p = 2212
+Beams:idB = 2212        ! second beam p = 2212
+Beams:eCM = 13000       ! CM energy of collision
+
+SoftQCD:all = off        ! All soft QCD processes are on
+SoftQCD:inelastic = on   ! All soft QCD except elastic
+
+! 2) Settings related to the run
+Main:numberOfEvents = 100000          ! number of events to generate
+Main:timesAllowErrors = 100000          ! abort run after this many flawed events
+
+Init:showChangedSettings = on      ! list changed settings
+Next:numberCount = 500            ! print message every n events
+Next:numberShowLHA = 1             ! print LHA information n times
+Next:numberShowInfo = 1            ! print event information n times
+Next:numberShowProcess = 1         ! print process record n times
+Next:numberShowEvent = 1           ! print event record n times
+Stat:showPartonLevel = on          ! additional statistics on MPI
+
+! 3) Open charm tune setting
+ColourReconnection:mode=1
+ColourReconnection:allowDoubleJunRem=off
+BeamRemnants:remnantMode=1
+Ropewalk:ropeHadronization=on
+Ropewalk:doFlavour=on
+Ropewalk:doShoving=on
+PartonVertex:setVertex=on
+StringFlav:probStoUD=0.2
+StringFlav:probQQtoQ=0.078
+StringZ:aLund=0.36
+StringZ:bLund=0.56
+StringFlav:mesonCvector=1.35
+StringFlav:probQQ1toQQ0join=0.0275,0.0275,0.0275,0.0275
+
+MultipartonInteractions:pT0Ref=2.15
+Ropewalk:beta=0.2
+Ropewalk:deltat=0.05
+Ropewalk:gAmplitude=0.0
+Ropewalk:tShove=0.1
+
+Random:Setseed = on
+#Random:seed = 1
+#En acarus debe de ser
+Random:seed = -2
